@@ -1,0 +1,17 @@
+extends layout
+block content
+    center
+        div.box
+            h1#word 비밀번호 변경
+            form(action="/auth/change" method="post")
+                input(type="hidden" name="_method" value="PUT")
+                input.input(placeholder="현재 비밀번호" name="now" type="password")
+                br
+                input.input(placeholder="바꿀 비밀번호" name="after" type="password")
+                br
+                input.input(placeholder="바꿀 비밀번호 확인" name="re" type="password")
+                br
+                if changeError
+                    p.error= changeError
+                br
+                button#btn 변경

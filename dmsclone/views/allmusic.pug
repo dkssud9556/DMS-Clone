@@ -1,0 +1,17 @@
+extends layout
+block content
+    center
+        table
+            th 번호
+            th 이름
+            th 노래명
+            th 가수명
+            th 요일
+            for musicInfo, index in musics
+                if musicInfo.name && musicInfo.singer
+                    tr
+                        td= index+1
+                        td= musicInfo.user.realname
+                        td= musicInfo.name
+                        td= musicInfo.singer
+                        td= musicInfo.day === 0 ? '월' : musicInfo.day === 1 ? '화' : musicInfo.day === 2 ? '수' : musicInfo.day === 3 ? '목' : '금'

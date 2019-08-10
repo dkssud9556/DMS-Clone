@@ -1,0 +1,12 @@
+extends layout
+block content
+    center
+        table
+            th 번호
+            th 이름
+            th 잔류신청
+            for remainInfo, index in remains
+                tr
+                    td= index+1
+                    td= remainInfo.user.realname
+                    td= remainInfo.status === 0 ? '잔류' : remainInfo.status === 1 ? '금요귀가' : remainInfo.status === 2 ? '토요귀가' : '토요귀사'

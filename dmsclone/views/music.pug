@@ -1,0 +1,23 @@
+extends layout
+block content
+    center
+        if song && singer && day
+            p 노래명 : #{song} 가수명 : #{singer} 요일 : #{day}
+        else
+            p 기상 음악을 신청하세요
+        div.box
+            h1 기상음악신청
+            form(action="/apply/music" method="post")
+                label(for="day") 요일 선택
+                select(name="day" id="day")
+                    option(value=0) 월요일
+                    option(value=1) 화요일
+                    option(value=2) 수요일
+                    option(value=3) 목요일
+                    option(value=4) 금요일
+                br
+                input.input(placeholder="노래 제목" name="name" required)
+                br
+                input.input(placeholder="아티스트" name="singer" required)
+                br
+                button#btn(type="submit") 신청
