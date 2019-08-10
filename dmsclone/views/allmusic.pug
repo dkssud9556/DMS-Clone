@@ -2,16 +2,37 @@ extends layout
 block content
     center
         table
-            th 번호
             th 이름
             th 노래명
             th 가수명
             th 요일
-            for musicInfo, index in musics
-                if musicInfo.name && musicInfo.singer
+            for musicInfo in musics
+                if user1
+                    if musicInfo.name && musicInfo.singer
+                        if musicInfo.user.id === user1.id
+                            tr
+                                td.me= musicInfo.user.realname
+                                td.me= musicInfo.name
+                                td.me= musicInfo.singer
+                                td.me= musicInfo.day === 0 ? '월' : musicInfo.day === 1 ? '화' : musicInfo.day === 2 ? '수' : musicInfo.day === 3 ? '목' : '금'
+                        else
+                            tr
+                                td.other= musicInfo.user.realname
+                                td.other= musicInfo.name
+                                td.other= musicInfo.singer
+                                td.other= musicInfo.day === 0 ? '월' : musicInfo.day === 1 ? '화' : musicInfo.day === 2 ? '수' : musicInfo.day === 3 ? '목' : '금'
+                else
                     tr
-                        td= index+1
-                        td= musicInfo.user.realname
-                        td= musicInfo.name
-                        td= musicInfo.singer
-                        td= musicInfo.day === 0 ? '월' : musicInfo.day === 1 ? '화' : musicInfo.day === 2 ? '수' : musicInfo.day === 3 ? '목' : '금'
+                        td.other= musicInfo.user.realname
+                        td.other= musicInfo.name
+                        td.other= musicInfo.singer
+                        td.other= musicInfo.day === 0 ? '월' : musicInfo.day === 1 ? '화' : musicInfo.day === 2 ? '수' : musicInfo.day === 3 ? '목' : '금'
+    div.innerbox3
+        a(href="/apply/remain")
+            button.another 잔류신청
+        a(href="/apply/music")
+            button.another 기상음악신청
+        a(href="/all/remain")
+            button.another 전체잔류신청
+        a(href="/all/music")
+            button.now 기상음악조회

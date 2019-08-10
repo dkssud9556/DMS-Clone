@@ -12,7 +12,16 @@ block content
                 div.innerbox
                     h1#title 잔류
                     div#content 잔류를 신청하신 경우 주말동안 기숙사에 남게 됩니다. 잔류를 신청하시겠습니까?
-                button(type="submit") 신청
+                button#btn(type="submit") 신청
+    div.innerbox3
+        a(href="/apply/remain")
+            button.now 잔류신청
+        a(href="/apply/music")
+            button.another 기상음악신청
+        a(href="/all/remain")
+            button.another 전체잔류신청
+        a(href="/all/music")
+            button.another 기상음악조회
     script.
         document.getElementById('status').addEventListener('change', () => {
             var title = document.getElementById('title');

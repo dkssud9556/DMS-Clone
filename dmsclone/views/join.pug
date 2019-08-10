@@ -4,9 +4,9 @@ block content
         div.box
             h1 회원가입
             form(action="/auth/join" method="post")
-                input(type="text" name="username" placeholder="아이디" autofocus required).input
+                input(type="text" name="username" placeholder="아이디" autofocus required autocomplete="off").input
                 br
-                input(type="text" name="realname" placeholder="실명" required).input
+                input(type="text" name="realname" placeholder="실명" required autocomplete="off").input
                 br
                 input#password(type="password" name="password" placeholder="비밀번호" required).input
                 br

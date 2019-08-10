@@ -2,22 +2,37 @@ extends layout
 block content
     center
         if song && singer && day
-            p 노래명 : #{song} 가수명 : #{singer} 요일 : #{day}
+            p 노래 : #{song}
+            p 아티스트 : #{singer}
+            p #{day}
         else
             p 기상 음악을 신청하세요
         div.box
             h1 기상음악신청
             form(action="/apply/music" method="post")
-                label(for="day") 요일 선택
-                select(name="day" id="day")
-                    option(value=0) 월요일
-                    option(value=1) 화요일
-                    option(value=2) 수요일
-                    option(value=3) 목요일
-                    option(value=4) 금요일
+                div.innerbox2
+                    h2(style="color:aquamarine") 요일선택
+                    select(name="day" id="day" size="5")
+                        option(value=0 selected) 월요일
+                        option(value=1) 화요일
+                        option(value=2) 수요일
+                        option(value=3) 목요일
+                        option(value=4) 금요일
                 br
-                input.input(placeholder="노래 제목" name="name" required)
+                input.input(placeholder="노래 제목" name="name" required autocomplete="off")
                 br
-                input.input(placeholder="아티스트" name="singer" required)
+                input.input(placeholder="아티스트" name="singer" required autocomplete="off")
                 br
                 button#btn(type="submit") 신청
+            form(action="/apply/music" method="post")
+                input(type="hidden" name="_method" value="DELETE")
+                button#cancel(type="submit") 취소
+    div.innerbox3
+        a(href="/apply/remain")
+            button.another 잔류신청
+        a(href="/apply/music")
+            button.now 기상음악신청
+        a(href="/all/remain")
+            button.another 전체잔류신청
+        a(href="/all/music")
+            button.another 기상음악조회

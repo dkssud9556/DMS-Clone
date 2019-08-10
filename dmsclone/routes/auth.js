@@ -5,13 +5,13 @@ const passport = require('passport');
 const {isNotLoggedIn, isLoggedIn} = require('./middlewares');
 
 router.get('/login', isNotLoggedIn, (req, res) => {
-    res.render('login', {
+    res.status(200).render('login', {
         loginError:req.flash('loginError')
     });
 });
 
 router.get('/join', isNotLoggedIn,(req, res) => {
-    res.render('join', {
+    res.status(200).render('join', {
         joinError:req.flash('joinError')
     });
 });
@@ -73,7 +73,7 @@ router.get('/logout', isLoggedIn, (req, res) => {
 });
 
 router.get('/change', isLoggedIn, (req, res) => {
-    res.render('change', {
+    res.status(200).render('change', {
         changeError:req.flash('changeError')
     });
 });

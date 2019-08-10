@@ -4,7 +4,7 @@ block content
         div.box
             h1 로그인
             form(action="/auth/login" method="post")
-                input(type="text" name="username" placeholder="아이디" autofocus required).input
+                input(type="text" name="username" placeholder="아이디" autofocus required autocomplete="off").input
                 br
                 input(type="password" name="password" placeholder="비밀번호" required).input
                 br
