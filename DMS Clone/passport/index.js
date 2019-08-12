@@ -9,8 +9,8 @@ module.exports = (passport) => {
         try {
             const user = await User.findOne({where:{id}});
             done(null, user);
-        } catch (err) {
-            done(err);
+        } catch (e) {
+            done(e);
         }
     });
     local(passport);
