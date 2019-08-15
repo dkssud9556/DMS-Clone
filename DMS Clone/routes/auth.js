@@ -36,7 +36,7 @@ router.post('/login', isNotLoggedIn, async (req, res, next) => {
             return next(authError);
         }
         if(!user) {
-            return res.status(422).json({message:info.message, code:422});
+            return res.status(400).json({message:info.message, code:400});
         }
         return req.login(user, (loginError) => {
             if(loginError) {

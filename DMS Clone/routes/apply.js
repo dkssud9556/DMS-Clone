@@ -7,7 +7,7 @@ router.post('/stay', isLoggedIn, async (req, res, next) => {
     const {status} = req.body;
     try {
         if(status !== '잔류' && status !== '금요귀가' && status !== '토요귀가' && status !== '토요귀사') {
-            return res.status(400).json({message:'입력값이 잘못되었습니다. (잔류, 금요귀가, 토요귀가, 토요귀사)', code:422});
+            return res.status(400).json({message:'입력값이 잘못되었습니다. (잔류, 금요귀가, 토요귀가, 토요귀사)', code:400});
         }
         await Stay.update({status}, {where:{id:req.user.id}});
         res.status(201).json({message:`${status} 신청 완료`, code:201});
@@ -53,7 +53,7 @@ router.get('/my-music', isLoggedIn, async (req, res, next) => {
     try {
         const music = await Music.findOne({where:{userId:req.user.id}});
         if(!music) {
-            return res.status(404).json({message:'기상음악을 신청해보세요.', code:404});
+            return res.status(204).json({message:'기상음악을 신청해보세요.', code:204});
         }
         res.status(200).json({message:'기상음악조회 성공', code:200 ,song:music.song, singer:music.singer, day:music.day});
     } catch (e) {
@@ -82,7 +82,7 @@ router.get('/all-music', async (req, res, next) => {
             attributes: ['username', 'realname']
         });
         if(musics.length === 0) {
-            return res.status(404).json({message:'신청된 음악이 없습니다.', code:404});
+            return res.status(204).json({message:'신청된 음악이 없습니다.', code:204});
         }
         res.status(200).json({musics});
     } catch (e) {
