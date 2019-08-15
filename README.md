@@ -1,7 +1,7 @@
 # DMS-Clone
 ## 사용 언어 : **JavaScript (Node.JS)**
 ## 사용 프레임워크 : Express
----
+
 ## 데이터베이스
 
 유저 정보, 잔류 신청 정보 등을 관리하기 위해서 MySQL을 사용했다. 자바스크립트를 이용하여 MySQL을 조작하기 위해서 npm에서 제공하는 ORM인 Sequelize를 사용했다.
