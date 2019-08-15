@@ -35,7 +35,6 @@ router.post('/music', isLoggedIn, async (req, res, next) => {
     try {
         const today = await Music.findAll({where:{day}});
         if(today.length >= 5) {
-            //406:허용하지 않음
             return res.status(409).json({message:'해당 요일은 신청이 꽉찼습니다.', code:409});
         }
         const myMusic = await Music.findOne({where:{userId:req.user.id}});
