@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const {isLoggedIn} = require('./middlewares');
 const {User, Stay, Music} = require('../models');
-const sequelize = require('../models').Sequelize;
 
+//잔류 신청
 router.post('/stay', isLoggedIn, async (req, res, next) => {
     const {status} = req.body;
     try {
@@ -17,6 +17,7 @@ router.post('/stay', isLoggedIn, async (req, res, next) => {
     }
 });
 
+//내 잔류 조회
 router.get('/my-stay', isLoggedIn, async (req, res, next) => {
     try {
         const stay = await Stay.findOne({where: {userId: req.user.id}});
@@ -27,6 +28,7 @@ router.get('/my-stay', isLoggedIn, async (req, res, next) => {
     }
 });
 
+//기상음악 신청
 router.post('/music', isLoggedIn, async (req, res, next) => {
     const {song, singer, day} = req.body;
     if(day !== '월' && day !== '화' && day !== '수' && day !== '목' && day !== '금') {
@@ -34,7 +36,7 @@ router.post('/music', isLoggedIn, async (req, res, next) => {
     }
     try {
         const today = await Music.findAll({where:{day}});
-        if(today.length >= 5) {
+        if(today.length >= 4) {
             return res.status(409).json({message:'해당 요일은 신청이 꽉찼습니다.', code:409});
         }
         const myMusic = await Music.findOne({where:{userId:req.user.id}});
@@ -49,6 +51,7 @@ router.post('/music', isLoggedIn, async (req, res, next) => {
     }
 });
 
+//내 기상음악 조회
 router.get('/my-music', isLoggedIn, async (req, res, next) => {
     try {
         const music = await Music.findOne({where:{userId:req.user.id}});
@@ -62,7 +65,8 @@ router.get('/my-music', isLoggedIn, async (req, res, next) => {
     }
 });
 
-router.get('/all-stay', async (req, res, next) => {
+//모든 잔류신청 조회
+router.get('/all-stay', isLoggedIn, async (req, res, next) => {
     try {
         const stay = await User.findAll({
             include: [{model:Stay, required:true, attributes: ['status']}],
@@ -75,7 +79,8 @@ router.get('/all-stay', async (req, res, next) => {
     }
 });
 
-router.get('/all-music', async (req, res, next) => {
+//모든 기상음악 조회
+router.get('/all-music', isLoggedIn, async (req, res, next) => {
     try {
         const musics = await User.findAll({
             include: [{model:Music, required:true, attributes: ['song', 'singer', 'day']}],

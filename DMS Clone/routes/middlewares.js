@@ -10,6 +10,6 @@ exports.isNotLoggedIn = (req, res, next) => {
     if(!req.isAuthenticated()) {
         next();
     } else {
-        res.status(412).json({message:'로그아웃 해야 합니다.', code:412});
+        res.status(403).json({message:'로그아웃 해야 합니다.', code:403});
     }
 };

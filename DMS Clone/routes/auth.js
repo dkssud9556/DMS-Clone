@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const passport = require('passport');
 require('dotenv').config();
 
+//회원가입
 router.post('/join', isNotLoggedIn, async (req, res, next) => {
     const {username, realname, password, repassword} = req.body;
     try {
@@ -29,6 +30,7 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
     }
 });
 
+//로그인
 router.post('/login', isNotLoggedIn, async (req, res, next) => {
     passport.authenticate('local', async (authError, user, info) => {
         if(authError) {
@@ -48,12 +50,14 @@ router.post('/login', isNotLoggedIn, async (req, res, next) => {
     })(req, res, next);
 });
 
+//로그아웃
 router.get('/logout', isLoggedIn, (req, res) => {
     req.logout();
     req.session.destroy();
     res.status(200).json({message:'로그아웃 성공', code:200});
 });
 
+//비밀번호 변경
 router.post('/change', isLoggedIn, async (req, res, next) => {
     const {now, password, repassword} = req.body;
     try {
